@@ -1,6 +1,7 @@
 #include "main.h"
+
 /**
- * binary_to_uint(const char *b);- converting binary
+ * binary_to_uint - a program converting binary numbers
  * to intergers/decimal numbers
  *
  * @b: a character pointer to a string containing the binary numbers
@@ -40,4 +41,5 @@ unsigned int binary_to_uint(const char *b)
 	pow = 1;
 
 	}
+	return (sum);
 }
