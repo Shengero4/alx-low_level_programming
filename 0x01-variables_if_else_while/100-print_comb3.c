@@ -4,27 +4,27 @@
  * main - Prints all possible different combinations of two digits
  * Return: Always 0
  */
-int main(void)
-{
-	int n, m;
+int main() {
+    int i, j;
 
-	for (m = 48; n <= 56; n++)
-	{
-		for (n = 49; m <= 57; m++)
-		{
-		if (m > n)
-		{
-		putchar(n);
-	putchar(m);
-if (n != 56 || m != 57)
-{
-putchar(',');
-putchar(' ');
-}
-}
-}
-}
-putchar('\n');
-return (0);
-}
+    for (i = 0; i < 10; i++) {
+        for (j = i + 1; j < 10; j++) {
+            // Print tens digit
+            putchar(i + '0');
+            // Print units digit
+            putchar(j + '0');
 
+            // Check if it is not the last combination
+            if (!(i == 8 && j == 9)) {
+                // Print separator
+                putchar(',');
+                putchar(' ');
+            }
+        }
+    }
+
+    // Print a new line at the end
+    putchar('\n');
+
+    return 0;
+}
