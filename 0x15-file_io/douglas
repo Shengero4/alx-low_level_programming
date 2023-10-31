@@ -1,0 +1,73 @@
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#define BUFFER_SIZE 1024
+
+int check_arguments(int argc, char *argv[]) {
+    if (argc != 3) {
+        dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", argv[0]);
+        return 97;
+    }
+    return 0;
+}
+
+int open_file(const char *filename, int flags, int mode, const char *error_message) {
+    int file_descriptor = open(filename, flags, mode);
+    if (file_descriptor == -1) {
+        dprintf(STDERR_FILENO, "Error: %s %s\n", error_message, filename);
+        return 98;
+    }
+    return file_descriptor;
+}
+
+int copy_files(int file_from, int file_to) {
+    char buffer[BUFFER_SIZE];
+    ssize_t bytes_read, bytes_written;
+
+    while ((bytes_read = read(file_from, buffer, BUFFER_SIZE)) > 0) {
+        bytes_written = write(file_to, buffer, bytes_read);
+        if (bytes_written == -1 || bytes_written != bytes_read) {
+            dprintf(STDERR_FILENO, "Error: Can't write to file\n");
+            return 99;
+        }
+    }
+
+    if (bytes_read == -1) {
+        dprintf(STDERR_FILENO, "Error: Can't read from file\n");
+        return 98;
+    }
+
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+    int file_from, file_to;
+    
+    if (check_arguments(argc, argv) != 0) {
+        return 97;
+    }
+
+    file_from = open_file(argv[1], O_RDONLY, 0, "Can't read from file");
+    if (file_from == 98) {
+        return 98;
+    }
+
+    file_to = open_file(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664, "Can't write to file");
+    if (file_to == 98) {
+        close(file_from);
+        return 99;
+    }
+
+    int result = copy_files(file_from, file_to);
+    close(file_from);
+    close(file_to);
+
+    if (result == 99 || result == 98) {
+        return result;
+    }
+
+    return 0;
+}
+
