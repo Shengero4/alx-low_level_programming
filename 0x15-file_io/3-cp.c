@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <stdlib.h>
+#include "main.h"
 
 /**
  * print_error - prints error message to stderr and exits with given code.
