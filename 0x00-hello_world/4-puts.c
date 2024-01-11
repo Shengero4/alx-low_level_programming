@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 /**
- * using puts to print a string instead of printf
- * the function needs to return 0
+ * main - using puts to print a string instead of printf
+ * Return: 0
  */
 int main(void)
 {
