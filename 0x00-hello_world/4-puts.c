@@ -1,9 +1,11 @@
 #include <stdio.h>
 
-int main (void)
+/**
+ * using puts to print a string instead of printf
+ * the function needs to return 0
+ */
+int main(void)
 {
-	char text[] = ""Programming is like building a multilingual puzzle";
-	// using puts to print a string instead of printf
-	puts(text);
-	return(0);
+	puts("\"Programming is like building a multilingual puzzle");
+	return (0);
 }
