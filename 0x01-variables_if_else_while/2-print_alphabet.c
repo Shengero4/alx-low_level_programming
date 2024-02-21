@@ -3,12 +3,13 @@
 /**
  * main - Entry point
  *
- * Description: Prints the alphabet in lowercase followed by a new line using the putchar function only twicel.
+ * Description: Prints the alphabet in lowercase followed by a new
+ * line using the putchar.
  *
  * Return: Always 0 (Success)
  */
 
-int main (void)
+int main(void)
 {
 	char c;
 	/* Print lowercase alphabet using putchar */
